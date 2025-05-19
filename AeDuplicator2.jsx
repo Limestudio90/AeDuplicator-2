@@ -4,6 +4,10 @@
 // Questo script permette di duplicare una precomposizione in una griglia
 // con controlli avanzati per distribuzione, offset e variazioni
 
+// Carica il logo da file esterno
+var scriptPath = File($.fileName).path;
+var logoFile = new File(scriptPath + "/logo.png"); // Usa il file logo.png nella stessa cartella
+
 (function(thisObj) {
     // Costanti e configurazione
     var SCRIPT_NAME = "AE Duplicator 2.0";
@@ -31,12 +35,22 @@
         myPanel.spacing = 10;
         myPanel.margins = 16;
         
+        // Aggiungi il logo se il file esiste
+        if (logoFile && logoFile.exists) {
+            try {
+                var logoImage = myPanel.add("image", undefined, logoFile);
+                logoImage.alignment = ["center", "top"];
+            } catch (e) {
+                // Se c'è un errore nel caricamento del logo, lo ignoriamo silenziosamente
+            }
+        }
+        
         // Gruppo per le impostazioni di distribuzione
         var distributionPanel = myPanel.add("panel", undefined, "Distribuzione");
         distributionPanel.orientation = "column";
         distributionPanel.alignChildren = ["fill", "top"];
-        distributionPanel.spacing = 5;
-        distributionPanel.margins = 10;
+        distributionPanel.spacing = 2; // Ridotto da 5
+        distributionPanel.margins = 8; // Ridotto da 10
         
         // Dropdown per il tipo di distribuzione
         var distTypeGroup = distributionPanel.add("group");
@@ -50,8 +64,8 @@
         var gridPanel = distributionPanel.add("panel", undefined, "Opzioni Griglia");
         gridPanel.orientation = "column";
         gridPanel.alignChildren = ["fill", "top"];
-        gridPanel.spacing = 5;
-        gridPanel.margins = 10;
+        gridPanel.spacing = 2; // Ridotto da 5
+        gridPanel.margins = 8; // Ridotto da 10
         
         // Campi per righe e colonne
         var rowColGroup = gridPanel.add("group");
@@ -114,8 +128,8 @@
         var circlePanel = distributionPanel.add("panel", undefined, "Opzioni Cerchio");
         circlePanel.orientation = "column";
         circlePanel.alignChildren = ["fill", "top"];
-        circlePanel.spacing = 5;
-        circlePanel.margins = 10;
+        circlePanel.spacing = 2; // Ridotto da 5
+        circlePanel.margins = 8; // Ridotto da 10
         circlePanel.visible = false;
         
         var radiusGroup = circlePanel.add("group");
@@ -168,8 +182,8 @@
         var spiralPanel = distributionPanel.add("panel", undefined, "Opzioni Spirale");
         spiralPanel.orientation = "column";
         spiralPanel.alignChildren = ["fill", "top"];
-        spiralPanel.spacing = 5;
-        spiralPanel.margins = 10;
+        spiralPanel.spacing = 2; // Ridotto da 5
+        spiralPanel.margins = 8; // Ridotto da 10
         spiralPanel.visible = false;
         
         var spiralCountGroup = spiralPanel.add("group");
@@ -242,8 +256,8 @@
         var linePanel = distributionPanel.add("panel", undefined, "Opzioni Linea");
         linePanel.orientation = "column";
         linePanel.alignChildren = ["fill", "top"];
-        linePanel.spacing = 5;
-        linePanel.margins = 10;
+        linePanel.spacing = 2; // Ridotto da 5
+        linePanel.margins = 8; // Ridotto da 10
         linePanel.visible = false;
         
         var lineCountGroup = linePanel.add("group");
@@ -295,8 +309,8 @@
         var variationsPanel = myPanel.add("panel", undefined, "Variazioni");
         variationsPanel.orientation = "column";
         variationsPanel.alignChildren = ["fill", "top"];
-        variationsPanel.spacing = 5;
-        variationsPanel.margins = 10;
+        variationsPanel.spacing = 2; // Ridotto da 5
+        variationsPanel.margins = 8; // Ridotto da 10
         
         // Checkbox per randomizzazione
         var randomCheck = variationsPanel.add("checkbox", undefined, "Randomizza valori");
@@ -421,8 +435,8 @@
         var optionsPanel = myPanel.add("panel", undefined, "Opzioni");
         optionsPanel.orientation = "column";
         optionsPanel.alignChildren = ["fill", "top"];
-        optionsPanel.spacing = 5;
-        optionsPanel.margins = 10;
+        variationsPanel.spacing = 2; // Ridotto da 5
+        variationsPanel.margins = 8; // Ridotto da 10
         
         // Checkbox per mantenere il livello originale
         var keepOriginalCheck = optionsPanel.add("checkbox", undefined, "Mantieni livello originale");
